@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import { Noto_Sans } from "next/font/google";
+import TanstackqueryProvider from "@/lib/TanstackqueryProvider";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import "@/styles/reset.css";
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
@@ -24,8 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className={`${notoSans.variable}`}>
+        <TanstackqueryProvider>
+          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+        </TanstackqueryProvider>
       </body>
     </html>
   );
