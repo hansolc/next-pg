@@ -1,6 +1,9 @@
 export async function getComments() {
   const startTime = Date.now();
-  console.log("💬 [getComments] 시작");
+  const isServer = typeof window === "undefined";
+  console.log(
+    `💬 [getComments] 시작 ${isServer ? "🟦 SERVER" : "🟨 CLIENT"}`
+  );
 
   try {
     // 인위적인 delay (2초) - waterfall 차이를 명확하게 보기 위함
@@ -13,7 +16,9 @@ export async function getComments() {
     const data = await res.json();
 
     const duration = Date.now() - startTime;
-    console.log(`✅ [getComments] 완료 (${duration}ms)`);
+    console.log(
+      `✅ [getComments] 완료 (${duration}ms) ${isServer ? "🟦 SERVER" : "🟨 CLIENT"}`
+    );
 
     return data;
   } catch (error) {

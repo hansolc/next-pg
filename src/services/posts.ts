@@ -1,6 +1,9 @@
 export async function getPosts() {
   const startTime = Date.now();
-  console.log("🚀 [getPosts] 시작");
+  const isServer = typeof window === "undefined";
+  console.log(
+    `🚀 [getPosts] 시작 ${isServer ? "🟦 SERVER" : "🟨 CLIENT"}`
+  );
 
   try {
     // 인위적인 delay (2초) - waterfall 차이를 명확하게 보기 위함
@@ -13,7 +16,9 @@ export async function getPosts() {
     const data = await res.json();
 
     const duration = Date.now() - startTime;
-    console.log(`✅ [getPosts] 완료 (${duration}ms)`);
+    console.log(
+      `✅ [getPosts] 완료 (${duration}ms) ${isServer ? "🟦 SERVER" : "🟨 CLIENT"}`
+    );
 
     return data;
   } catch (error) {
